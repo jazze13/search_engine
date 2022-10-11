@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>search_engine</title>
+    <link rel="stylesheet" href="{% static "css/style.css" %}">
+</head>
+<body>
+    
+    <div class="wrapper">
+
+        <main>
+
+            <div class="search_wrapper">
+                <form class="search_form" action="search_results" method="post">
+                    {% csrf_token %}
+                    <h1 class="title">Search Engine</h1>
+
+                    <div class="search_bar">
+                        <input type="text" class="search" placeholder="Search" name="search_input">
+                        <button type="submit" class="search_button">
+                            <svg viewBox="0 0 512 512">
+                                <path opacity="1.00" d=" M 330.82 96.99 C 330.05 90.82 335.74 84.95 341.93 85.48 C 346.77 85.65 350.01 89.63 353.18 92.77 C 404.68 144.28 456.19 195.78 507.69 247.28 C 509.99 249.53 511.69 252.43 512.00 255.68 L 512.00 256.22 C 511.72 259.49 510.04 262.42 507.73 264.68 C 456.22 316.19 404.71 367.69 353.21 419.20 C 350.22 422.10 347.33 425.80 342.93 426.40 C 337.19 427.47 331.28 422.84 330.83 417.05 C 330.29 413.20 332.47 409.71 335.11 407.13 C 381.95 360.31 428.76 313.48 475.59 266.66 C 321.03 266.65 166.47 266.68 11.91 266.64 C 5.88 267.14 0.34 262.37 0.00 256.31 L 0.00 255.82 C 0.25 249.70 5.84 244.85 11.92 245.36 C 166.47 245.32 321.03 245.36 475.58 245.34 C 429.77 199.52 383.96 153.71 338.15 107.91 C 335.09 104.80 331.19 101.68 330.82 96.99 Z" />
+                            </svg>
+                        </button>
+                    </div>
+                </form>
+                {% if search_results %}
+                <div class="search_results">
+                    <h3>Results:</h3>
+                    {% for sentence in search_results %}
+                    <p style="margin-bottom:20px;">{{ sentence }}</p>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+
+        </main>
+
+    </div>
+
+</body>
+<script src="{% static "assets/js/script.js" %}"></script>
+</html>

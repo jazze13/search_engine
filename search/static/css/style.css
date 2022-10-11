@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Passions+Conflict&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
+* {
+    padding:0;
+    margin:0;
+}
+
+html {
+    height:100%;
+}
+
+body {
+    background:#000;
+    color:#aaa;
+    font-family:'ubuntu', sans-serif;
+    min-height:100%;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+a {
+    text-decoration:none;
+    color:inherit;
+}
+
+.search_wrapper {
+    max-width:700px;
+}
+
+.search_form {
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    gap:30px;
+    margin-bottom:30px;
+}
+
+.search_bar {
+    border:3px solid #111 !important;
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    gap:15px;
+    border-radius:100px;
+    padding:10px 25px;
+    width:500px;
+    transition:0.1s;
+}
+
+.search_bar:hover {
+    border-color:#333 !important;
+}
+
+.search {
+    border:none;
+    background:none;
+    box-sizing:border-box;
+    outline:none;
+    color:inherit;
+    width:100%;
+    font-family:inherit;
+    font-size:18px;
+}
+
+.search_button {
+    background:none;
+    border:none;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.search_button svg {
+    transition:0.1s;
+    width:28px;
+    fill:#444 !important;
+}
+
+.search_button:hover svg {
+    fill:#777 !important;
+}
+
+.search_results {
+    font-size:18px;
+}
+
+h1 {
+    margin-top:-10%;
+    font-family:'passions conflict', serif;
+    font-size:64px;
+}
+
+h3 {
+    font-family:'passions conflict', serif;
+    font-size:48px;
+    text-align:center;
+}
