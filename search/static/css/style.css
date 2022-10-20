@@ -10,15 +10,70 @@ html {
     height:100%;
 }
 
+.theme-dark {
+    --background:#000;
+    --text-main:#fff;
+    --accent:#fff;
+    --border-main:#222;
+    --border-hover:#333;
+    --arrow-main:#444;
+    --arrow-hover:#777;
+}
+
+.theme-light {
+    --background:#fff;
+    --text-main:#222;
+    --accent:#000;
+    --border-main:#bbb;
+    --border-hover:#888;
+    --arrow-main:#888;
+    --arrow-hover:#555;
+}
+
+.theme-dark .switch_to_dark_theme,
+.theme-light .switch_to_light_theme {
+    display:none;
+}
+
+.theme-switcher svg {
+    width:32px;
+    height:32px;
+    fill:var(--accent);
+}
+
+body,
+.search_bar,
+.search_bar svg {
+    transition:2s;
+}
+
+.wrapper {
+    padding:5%;
+}
+
 body {
-    background:#000;
-    color:#aaa;
+    background:var(--background);
+    color:var(--text-main);
     font-family:'ubuntu', sans-serif;
     min-height:100%;
 
     display:flex;
     align-items:center;
     justify-content:center;
+
+    position:relative;
+    scroll-behavior: smooth;
+}
+
+.theme-switcher {
+    position:absolute;
+    left:50px;
+    top:50px;
+}
+
+.theme-switcher button {
+    background:none;
+    border:none;
 }
 
 a {
@@ -26,8 +81,11 @@ a {
     color:inherit;
 }
 
-.search_wrapper {
-    max-width:700px;
+main {
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
 }
 
 .search_form {
@@ -37,22 +95,25 @@ a {
     align-items:center;
     gap:30px;
     margin-bottom:30px;
+
+    max-width:700px;
 }
 
 .search_bar {
-    border:3px solid #111 !important;
+    border:3px solid var(--border-main) !important;
     display:flex;
     flex-direction:row;
     align-items:center;
     gap:15px;
     border-radius:100px;
-    padding:10px 25px;
+    padding:2px 25px;
     width:500px;
     transition:0.1s;
+    box-sizing:border-box;
 }
 
 .search_bar:hover {
-    border-color:#333 !important;
+    border-color:var(--border-hover) !important;
 }
 
 .search {
@@ -64,6 +125,7 @@ a {
     width:100%;
     font-family:inherit;
     font-size:18px;
+    padding:10px 0;
 }
 
 .search_button {
@@ -77,11 +139,11 @@ a {
 .search_button svg {
     transition:0.1s;
     width:28px;
-    fill:#444 !important;
+    fill:var(--arrow-main) !important;
 }
 
 .search_button:hover svg {
-    fill:#777 !important;
+    fill:var(--arrow-hover) !important;
 }
 
 .search_results {
@@ -89,7 +151,6 @@ a {
 }
 
 h1 {
-    margin-top:-10%;
     font-family:'passions conflict', serif;
     font-size:64px;
 }
@@ -98,4 +159,52 @@ h3 {
     font-family:'passions conflict', serif;
     font-size:48px;
     text-align:center;
+    margin-bottom:20px;
+}
+
+@media screen and (max-width:640px) {
+    main {
+        display:initial;
+    }
+
+    body {
+        justify-content:initial;
+        align-items:initial;
+    }
+
+    .theme-switcher {
+        top:25px;
+        right:25px;
+        left:auto;
+    }
+
+    .search_form {
+        align-items:flex-start;
+        gap:15px;
+    }
+
+    .wrapper, body, .search_form {
+        width:100%;
+    }
+
+    .search_bar {
+        width:80%;
+    }
+
+    .search {
+        font-size:14px;
+        width:100%;
+    }
+
+    h1 {
+        font-size:48px;
+    }
+
+    h3 {
+        font-size:32px;
+    }
+
+    .search_results {
+        font-size:12px;
+    }
 }
