@@ -1,10 +1,20 @@
 # -*- coding: utf8 -*-
 
-def search(word, text):
+import re
+
+def search(keyword):
+    text_file = open('search/static/text.txt')
+    text = ''
     results = []
-    for i in text.replace('!', '.').replace('?', '.').split('.'):
-        if word.lower() in i.lower():
-            results.append(i)
-    if not results:
-        return ['0 результатов поиска']
+
+    for line in text_file:
+        text += line
+
+    for sentence in re.sub('[!|?|...]', '.', text).split('.'):
+        for word in re.sub('[,|;|:|"|\'|.]', ' ', sentence).split():
+            if keyword.lower() == word.lower():
+                results.append(sentence)
+                break
+
     return results
+

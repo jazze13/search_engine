@@ -47,22 +47,20 @@ body,
     transition:2s;
 }
 
-.wrapper {
-    padding:5%;
-}
-
 body {
     background:var(--background);
     color:var(--text-main);
     font-family:'ubuntu', sans-serif;
     min-height:100%;
-
+    
     display:flex;
     align-items:center;
     justify-content:center;
 
     position:relative;
     scroll-behavior: smooth;
+
+    padding:5%;
 }
 
 .theme-switcher {
@@ -113,7 +111,6 @@ main {
 
     position:relative;
     overflow:hidden;
-    cursor:text;
 }
 
 .search_bar:hover {
@@ -135,7 +132,7 @@ main {
 }
 
 .ripple {
-    background:#000;
+    background:var(--accent);
     transform:translate(-50%, -50%);
     border-radius:50%;
     pointer-events:none;
