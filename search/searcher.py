@@ -10,8 +10,8 @@ def search(keyword):
     for line in text_file:
         text += line
 
-    for sentence in re.sub('[!|?|...]', '.', text).split('.'):
-        for word in re.sub('[,|;|:|"|\'|.]', ' ', sentence).split():
+    for sentence in re.sub('[?|...]', '.', text).split('.'):
+        for word in re.sub('[,|;|:|"|\'|.|«|»]', ' ', sentence).split():
             if keyword.lower() == word.lower():
                 results.append(sentence)
                 break
