@@ -110,6 +110,10 @@ main {
     width:500px;
     transition:0.1s;
     box-sizing:border-box;
+
+    position:relative;
+    overflow:hidden;
+    cursor:text;
 }
 
 .search_bar:hover {
@@ -126,6 +130,34 @@ main {
     font-family:inherit;
     font-size:18px;
     padding:10px 0;
+
+    pointer-events:none;
+}
+
+.ripple {
+    background:#000;
+    transform:translate(-50%, -50%);
+    border-radius:50%;
+    pointer-events:none;
+    position:absolute;
+    animation:0.5s ripple linear;
+}
+
+@keyframes ripple {
+    0% {
+        opacity:0.35;
+        width:0;
+        height:0;
+    }
+    50% {
+        width:1000px;
+        height:1000px;
+    }
+    100% {
+        opacity:0;
+        width:1000px;
+        height:1000px;
+    }
 }
 
 .search_button {

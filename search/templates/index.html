@@ -82,7 +82,7 @@
                     {% csrf_token %}
                     <h1 class="title">Search Engine</h1>
 
-                    <div class="search_bar">
+                    <div class="search_bar click_effect">
                         <input type="text" class="search" placeholder="Search" name="search_input" value="{{ keyword }}">
                         <button type="submit" class="search_button">
                             <svg viewBox="0 0 512 512">
@@ -109,11 +109,7 @@
 
     </div>
 
-<script>
-    function switch_theme() {
-        document.body.classList.toggle('theme-dark');
-        document.body.classList.toggle('theme-light');
-    }
+<script src="{% static "js/script.js" %}">
 </script>
 
 </body>
