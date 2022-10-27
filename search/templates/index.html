@@ -76,6 +76,7 @@
                         </g>
                     </svg>                        
                 </button>
+                <button class="change_background">Custom Background</button>
             </div>
 
                 <form class="search_form" action="search_results" method="post">
@@ -106,6 +107,20 @@
                 {% endif %}
 
         </main>
+        
+        <div class="modals_wrapper">
+
+            <div class="modal custom_background">
+                <h3>Select Custom Background file</h3>
+                <input type="file" name="custom_background_upload" id="custom_background_upload" class="custom_background__upload file_upload">
+                <label for="custom_background_upload" class="custom_background__upload_label click_effect">upload file</label>
+                <div class="custom_background__bottom_buttons">
+                    <button class="custom_backgorund__apply custom_background__bottom_buttons__button" onclick="">Apply</button>
+                    <button class="close_modal custom_background__bottom_buttons__button">Close</button>
+                </div>
+            </div>
+
+        </div>
 
     </div>
 
