@@ -2,6 +2,7 @@
 
 
 // Переключение темы
+// TODO: проверка на наличие записив local storage
 document.body.className = localStorage.getItem('theme');
 
 function switch_theme() {
