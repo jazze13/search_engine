@@ -2,12 +2,17 @@
 
 
 // Переключение темы
-// TODO: проверка на наличие записив local storage
-document.body.className = localStorage.getItem('theme');
+let themeStored = localStorage.getItem('theme');
+if (themeStored)
+    document.body.className = localStorage.getItem('theme');
+
+let backgroundStored = localStorage.getItem('background');
+if (backgroundStored)
+    document.body.style.background = `url( ${backgroundStored} ) no-repeat center center / cover`;
 
 function switch_theme() {
     const theme = document.querySelectorAll('body, .search_bar, .search_bar svg');
-
+    
     theme.forEach(elem => {
         elem.style.transition = '2s';
     });
@@ -69,7 +74,7 @@ search.onblur = () => {
 
 
 // Модалки
-document.querySelector('.change_background').addEventListener('click', () => {
+document.querySelector('.change_background').addEventListener('click', function() {
     document.querySelectorAll('.modals_wrapper, .modal').forEach(elem => {
         elem.style.display = 'flex';
     })
@@ -85,21 +90,33 @@ document.querySelector('.close_modal').addEventListener( 'click', () => {
     closeModals();
 })
 
+document.querySelector('.modals_wrapper').addEventListener('click', function(event) {
+    if ( !event.target.closest('.modal') )
+        closeModals();
+})
 
-// Загрузка Файла для бэкграунда
-// const fileUpload = document.querySelector('.file_upload');
-// const fileUploadLabel = document.querySelector('label[for*=upload]');
 
-// fileUpload.addEventListener('change', e => {
-//     console.log(this);
-//     if (this.files) {
-//         let fileName = e.target.value.split('\\').pop();
-//         fileUploadLabel.innerHTML = fileName;
-//     }
-//     var customBackground = this.files[0];
-// })
 
-// document.querySelector('.custom_backgorund__apply').addEventListener('click', () => {
-//     document.body.style.backgroundImage = customBackground;
-//     closeModals();
-// })
+// выбор бэкграунда
+const backgrounds = document.querySelectorAll('.background_images__list__element');
+backgrounds.forEach(function(elem) {
+    elem.addEventListener('click', function(event) {
+        document.querySelectorAll('.element-selected').forEach(e => {
+            e.classList.toggle('element-selected');
+        })
+        this.classList.toggle('element-selected');
+    })
+
+})
+
+document.querySelector('.change_backgorund__apply').addEventListener('click', event => {
+    let imgPath = document.querySelector('.element-selected img').getAttribute('src');
+    document.body.style.background = `url( ${imgPath} ) no-repeat center center / cover`;
+
+    localStorage.setItem('background', imgPath);
+
+    closeModals();
+})
+
+
+const bg_list = document.querySelector('.background_images__list');

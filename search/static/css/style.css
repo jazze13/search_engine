@@ -4,6 +4,7 @@
 * {
     padding:0;
     margin:0;
+    font-family:'ubuntu', sans-serif;
 }
 
 html {
@@ -19,6 +20,10 @@ button {
 a {
     text-decoration:none;
     color:inherit;
+}
+
+ul {
+    list-style:none;
 }
 
 .theme-dark {
@@ -78,8 +83,8 @@ a {
 
 body {
     background:var(--background);
+    /* background:url('../img/bg1.jpg') no-repeat center center / cover; */
     color:var(--text-main);
-    font-family:'ubuntu', sans-serif;
     min-height:100%;
     
     display:flex;
@@ -87,7 +92,7 @@ body {
     justify-content:center;
 
     position:relative;
-    scroll-behavior: smooth;
+    overflow:hidden;
 
     padding:5%;
 }
@@ -97,6 +102,14 @@ main {
     flex-direction:column;
     justify-content:center;
     align-items:center;
+}
+
+.content_wrapper {
+    backdrop-filter: blur(15px);
+    padding:50px;
+    border-radius:40px;
+    box-shadow:10px 10px 30px #00000050;
+
 }
 
 .search_form {
@@ -255,8 +268,6 @@ h3 {
 
 
 .modals_wrapper {
-    /* min-height:100vh;
-    width:100%; */
     position:fixed;
     top:0;
     right:0;
@@ -279,32 +290,41 @@ h3 {
     gap:30px;
 }
 
-.custom_background__upload {
-    width:0.1px;
-    height:0.1px;
-    opacity:0;
+.background_images__list {
+    display:flex;
+    flex-flow:row wrap;
+
+    gap:10px;
+}
+
+.background_images__list__element {
+    max-width:150px;
+    max-height:150px;
     overflow:hidden;
-    position:absolute;
-    z-index:-1;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    box-sizing:border-box;
+    transition:0.15s;
 }
 
-.custom_background__upload_label,
-.custom_background__bottom_buttons__button {
-    background:transparent;
-    border:2px solid var(--accent);
-    transition:0.2s;
-    padding:10px 20px;
-    overflow:hidden;
-    position:relative;
+.background_images__list__element:hover img {
+    transform:scale(1.25);
 }
 
-.custom_background__upload_label:hover,
-.custom_background__bottom_buttons__button:hover {
-    background:var(--accent);
-    color:#222;
+.background_images__list__element img {
+    height:100%;
+    box-sizing:border-box;
+    display:block;
+    transition:0.15s;
 }
 
-.custom_background__bottom_buttons {
+.element-selected {
+    border:3px solid #fff;
+}
+
+.change_background__bottom_buttons {
     align-self:flex-end;
     display:flex;
     gap:15px;

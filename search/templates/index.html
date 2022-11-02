@@ -76,47 +76,59 @@
                         </g>
                     </svg>                        
                 </button>
-                <button class="change_background">Custom Background</button>
+                <button class="change_background">Change Background</button>
             </div>
 
-                <form class="search_form" action="search_results" method="post">
-                    {% csrf_token %}
-                    <h1 class="title">Search Engine</h1>
+                <div class="content_wrapper">
+                    <form class="search_form" action="search_results" method="post">
+                        {% csrf_token %}
+                        <h1 class="title">Search Engine</h1>
 
-                    <div class="search_bar click_effect">
-                        <input type="text" class="search" placeholder="Search" name="search_input" value="{{ keyword }}">
-                        <button type="submit" class="search_button">
-                            <svg viewBox="0 0 512 512">
-                                <path opacity="1.00" d=" M 330.82 96.99 C 330.05 90.82 335.74 84.95 341.93 85.48 C 346.77 85.65 350.01 89.63 353.18 92.77 C 404.68 144.28 456.19 195.78 507.69 247.28 C 509.99 249.53 511.69 252.43 512.00 255.68 L 512.00 256.22 C 511.72 259.49 510.04 262.42 507.73 264.68 C 456.22 316.19 404.71 367.69 353.21 419.20 C 350.22 422.10 347.33 425.80 342.93 426.40 C 337.19 427.47 331.28 422.84 330.83 417.05 C 330.29 413.20 332.47 409.71 335.11 407.13 C 381.95 360.31 428.76 313.48 475.59 266.66 C 321.03 266.65 166.47 266.68 11.91 266.64 C 5.88 267.14 0.34 262.37 0.00 256.31 L 0.00 255.82 C 0.25 249.70 5.84 244.85 11.92 245.36 C 166.47 245.32 321.03 245.36 475.58 245.34 C 429.77 199.52 383.96 153.71 338.15 107.91 C 335.09 104.80 331.19 101.68 330.82 96.99 Z" />
-                            </svg>
-                        </button>
+                        <div class="search_bar click_effect">
+                            <input type="text" class="search" placeholder="Search" name="search_input" value="{{ keyword }}">
+                            <button type="submit" class="search_button">
+                                <svg viewBox="0 0 512 512">
+                                    <path opacity="1.00" d=" M 330.82 96.99 C 330.05 90.82 335.74 84.95 341.93 85.48 C 346.77 85.65 350.01 89.63 353.18 92.77 C 404.68 144.28 456.19 195.78 507.69 247.28 C 509.99 249.53 511.69 252.43 512.00 255.68 L 512.00 256.22 C 511.72 259.49 510.04 262.42 507.73 264.68 C 456.22 316.19 404.71 367.69 353.21 419.20 C 350.22 422.10 347.33 425.80 342.93 426.40 C 337.19 427.47 331.28 422.84 330.83 417.05 C 330.29 413.20 332.47 409.71 335.11 407.13 C 381.95 360.31 428.76 313.48 475.59 266.66 C 321.03 266.65 166.47 266.68 11.91 266.64 C 5.88 267.14 0.34 262.37 0.00 256.31 L 0.00 255.82 C 0.25 249.70 5.84 244.85 11.92 245.36 C 166.47 245.32 321.03 245.36 475.58 245.34 C 429.77 199.52 383.96 153.71 338.15 107.91 C 335.09 104.80 331.19 101.68 330.82 96.99 Z" />
+                                </svg>
+                            </button>
+                        </div>
+                    </form>
+                    {% if keyword %}
+                    <div class="search_results">
+                        <h3>Results:</h3>
+                        {% if search_results %}
+                        {% for sentence in search_results %}
+                        <p style="margin-bottom:20px;">{{ sentence }}</p>
+                        {% endfor %}
+                        
+                        {% else %}
+                        <p>0 результатов поиска</p>
+                        {% endif %}
                     </div>
-                </form>
-                {% if keyword %}
-                <div class="search_results">
-                    <h3>Results:</h3>
-                    {% if search_results %}
-                    {% for sentence in search_results %}
-                    <p style="margin-bottom:20px;">{{ sentence }}</p>
-                    {% endfor %}
-                    
-                    {% else %}
-                    <p>0 результатов поиска</p>
                     {% endif %}
                 </div>
-                {% endif %}
 
         </main>
         
         <div class="modals_wrapper">
 
-            <div class="modal custom_background">
-                <h3>Select Custom Background file</h3>
-                <input type="file" name="custom_background_upload" id="custom_background_upload" class="custom_background__upload file_upload">
-                <label for="custom_background_upload" class="custom_background__upload_label click_effect">upload file</label>
-                <div class="custom_background__bottom_buttons">
-                    <button class="custom_backgorund__apply custom_background__bottom_buttons__button" onclick="">Apply</button>
-                    <button class="close_modal custom_background__bottom_buttons__button">Close</button>
+            <div class="modal change_background">
+                <h3>Choose background image</h3>
+                <div class="background_images">
+                    <ul class="background_images__list">
+                        <!-- <li class="background_images__list__element"><img src="{% static "img/bg/bg1.jpg" %}" alt="bg1.jpg"></li>
+                        <li class="background_images__list__element"><img src="{% static "img/bg/bg2.jpg" %}" alt="bg2.jpg"></li>
+                        <li class="background_images__list__element"><img src="{% static "img/bg/1.jpg" %}" alt="1.jpg"></li>
+                        <li class="background_images__list__element"><img src="{% static "img/bg/2.jpg" %}" alt="2.jpg"></li>
+                        <li class="background_images__list__element"><img src="{% static "img/bg/3.jpg" %}" alt="3.jpg"></li> -->
+                        {% for pic in pics %}
+                        <li style="color:#fff;">{{ pic }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="change_background__bottom_buttons">
+                    <button class="change_backgorund__apply change_background__bottom_buttons__button" onclick="">Apply</button>
+                    <button class="close_modal change_background__bottom_buttons__button">Close</button>
                 </div>
             </div>
 
