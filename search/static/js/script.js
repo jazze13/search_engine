@@ -40,6 +40,8 @@ clickEffect.forEach(elem => {
         
         let x = e.clientX - e.target.offsetLeft;
         let y = e.clientY - e.target.offsetTop;
+        console.log('x, y:', x, y);
+        console.log('clientx, target:', e.clientX, e.target.offsetLeft)
 
         let ripple = document.createElement('span');
         ripple.className = 'ripple';

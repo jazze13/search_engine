@@ -110,6 +110,10 @@ main {
     border-radius:40px;
     box-shadow:10px 10px 30px #00000050;
 
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
 }
 
 .search_form {
