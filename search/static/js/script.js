@@ -10,6 +10,20 @@ let backgroundStored = localStorage.getItem('background');
 if (backgroundStored)
     document.body.style.background = `url( ${backgroundStored} ) no-repeat center center / cover`;
 
+let blurStored = localStorage.getItem('backgroundBlur');
+if (blurStored) {
+    document.body.style.backdropFilter = `blur( ${blurStored}px)`;
+    document.querySelector('#blur_range').value = blurStored;
+}
+
+if ( checkBackground() ) {
+    let dimStored = localStorage.getItem('backgroundDim');
+    if (dimStored)
+        document.body.style.backgroundColor = `rgba(0, 0, 0, ${dimStored / 100})`;
+    document.querySelector('#dim_range').value = dimStored;
+}
+
+
 function switch_theme() {
     const theme = document.querySelectorAll('body, .search_bar, .search_bar svg');
     
@@ -111,14 +125,54 @@ backgrounds.forEach(function(elem) {
 
 })
 
-document.querySelector('.change_backgorund__apply').addEventListener('click', event => {
-    let imgPath = document.querySelector('.element-selected img').getAttribute('src');
-    document.body.style.background = `url( ${imgPath} ) no-repeat center center / cover`;
 
-    localStorage.setItem('background', imgPath);
+// слайдеры
+const blurRange = document.querySelector('#blur_range');
+const blurValue = document.querySelector('#blur_percent');
+const dimRange = document.querySelector('#dim_range');
+const dimPercent = document.querySelector('#dim_percent');
+
+setInterval(() => {
+    blurValue.textContent = blurRange.value;
+    dimPercent.textContent = dimRange.value + '%';
+}, 10);
+
+
+// применить
+document.querySelector('.change_backgorund__apply').addEventListener('click', event => {
+    const img = document.querySelector('.element-selected img');
+    if (img) {
+        let imgPath = img.getAttribute('src');
+        document.body.style.background = `url( ${imgPath} ) no-repeat center center / cover`;
+        localStorage.setItem('background', imgPath);    
+    } else if ( document.querySelector('.element-selected') == document.querySelector('.no-img') ) {
+        document.body.style.background = '';
+        localStorage.setItem('background', '');
+    }
+    
+    document.body.style.backdropFilter = `blur( ${blurRange.value}px)`;
+    if ( checkBackground() )
+        document.body.style.backgroundColor = `rgba(0, 0, 0, ${dimRange.value / 100})`;
+
+    localStorage.setItem('backgroundBlur', blurRange.value);
+    localStorage.setItem('backgroundDim', dimRange.value);
 
     closeModals();
 })
 
 
-const bg_list = document.querySelector('.background_images__list');
+function checkBackground() {
+    if (document.body.style.backgroundImage) return true;
+    else return false;
+}
+
+
+// постоянная подсветка выбранного бэкграунда
+const bgs = document.querySelectorAll('.background_images__list__element img');
+bgs.forEach( function(bg) {
+    let bgImg = bg.src.slice( bg.src.match('/static').index );
+    if (bgImg == backgroundStored) {
+        bg.parentElement.classList.toggle('element-selected');
+        return;
+    }
+})

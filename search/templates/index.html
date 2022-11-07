@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -76,58 +76,88 @@
                         </g>
                     </svg>                        
                 </button>
-                <button class="change_background">Change Background</button>
+                <button class="change_background">
+                    <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 262.394 262.394" style="enable-background:new 0 0 262.394 262.394;" xml:space="preserve">
+                    <g>
+                        <path d="M245.63,103.39h-9.91c-2.486-9.371-6.197-18.242-10.955-26.432l7.015-7.015c6.546-6.546,6.546-17.159,0-23.705
+                            l-15.621-15.621c-6.546-6.546-17.159-6.546-23.705,0l-7.015,7.015c-8.19-4.758-17.061-8.468-26.432-10.955v-9.914
+                            C159.007,7.505,151.502,0,142.244,0h-22.091c-9.258,0-16.763,7.505-16.763,16.763v9.914c-9.37,2.486-18.242,6.197-26.431,10.954
+                            l-7.016-7.015c-6.546-6.546-17.159-6.546-23.705,0.001L30.618,46.238c-6.546,6.546-6.546,17.159,0,23.705l7.014,7.014
+                            c-4.758,8.19-8.469,17.062-10.955,26.433h-9.914c-9.257,0-16.762,7.505-16.762,16.763v22.09c0,9.258,7.505,16.763,16.762,16.763
+                            h9.914c2.487,9.371,6.198,18.243,10.956,26.433l-7.015,7.015c-6.546,6.546-6.546,17.159,0,23.705l15.621,15.621
+                            c6.546,6.546,17.159,6.546,23.705,0l7.016-7.016c8.189,4.758,17.061,8.469,26.431,10.955v9.913c0,9.258,7.505,16.763,16.763,16.763
+                            h22.091c9.258,0,16.763-7.505,16.763-16.763v-9.913c9.371-2.487,18.242-6.198,26.432-10.956l7.016,7.017
+                            c6.546,6.546,17.159,6.546,23.705,0l15.621-15.621c3.145-3.144,4.91-7.407,4.91-11.853s-1.766-8.709-4.91-11.853l-7.016-7.016
+                            c4.758-8.189,8.468-17.062,10.955-26.432h9.91c9.258,0,16.763-7.505,16.763-16.763v-22.09
+                            C262.393,110.895,254.888,103.39,245.63,103.39z M131.198,191.194c-33.083,0-59.998-26.915-59.998-59.997
+                            c0-33.083,26.915-59.998,59.998-59.998s59.998,26.915,59.998,59.998C191.196,164.279,164.281,191.194,131.198,191.194z"/>
+                        <path d="M131.198,101.199c-16.541,0-29.998,13.457-29.998,29.998c0,16.54,13.457,29.997,29.998,29.997s29.998-13.457,29.998-29.997
+                            C161.196,114.656,147.739,101.199,131.198,101.199z"/>
+                    </g>
+                    </svg>
+                </button>
             </div>
 
-                <div class="content_wrapper">
-                    <form class="search_form" action="search_results" method="post">
-                        {% csrf_token %}
-                        <h1 class="title">Search Engine</h1>
+                <form class="search_form" action="search_results" method="post">
+                    {% csrf_token %}
+                    <h1 class="title">Search Engine</h1>
 
-                        <div class="search_bar click_effect">
-                            <input type="text" class="search" placeholder="Search" name="search_input" value="{{ keyword }}">
-                            <button type="submit" class="search_button">
-                                <svg viewBox="0 0 512 512">
-                                    <path opacity="1.00" d=" M 330.82 96.99 C 330.05 90.82 335.74 84.95 341.93 85.48 C 346.77 85.65 350.01 89.63 353.18 92.77 C 404.68 144.28 456.19 195.78 507.69 247.28 C 509.99 249.53 511.69 252.43 512.00 255.68 L 512.00 256.22 C 511.72 259.49 510.04 262.42 507.73 264.68 C 456.22 316.19 404.71 367.69 353.21 419.20 C 350.22 422.10 347.33 425.80 342.93 426.40 C 337.19 427.47 331.28 422.84 330.83 417.05 C 330.29 413.20 332.47 409.71 335.11 407.13 C 381.95 360.31 428.76 313.48 475.59 266.66 C 321.03 266.65 166.47 266.68 11.91 266.64 C 5.88 267.14 0.34 262.37 0.00 256.31 L 0.00 255.82 C 0.25 249.70 5.84 244.85 11.92 245.36 C 166.47 245.32 321.03 245.36 475.58 245.34 C 429.77 199.52 383.96 153.71 338.15 107.91 C 335.09 104.80 331.19 101.68 330.82 96.99 Z" />
-                                </svg>
-                            </button>
-                        </div>
-                    </form>
-                    {% if keyword %}
-                    <div class="search_results">
-                        <h3>Results:</h3>
-                        {% if search_results %}
-                        {% for sentence in search_results %}
-                        <p style="margin-bottom:20px;">{{ sentence }}</p>
-                        {% endfor %}
-                        
-                        {% else %}
-                        <p>0 результатов поиска</p>
-                        {% endif %}
+                    <div class="search_bar click_effect">
+                        <input type="text" class="search" placeholder="Search" name="search_input" value="{{ keyword }}">
+                        <button type="submit" class="search_button">
+                            <svg viewBox="0 0 512 512">
+                                <path opacity="1.00" d=" M 330.82 96.99 C 330.05 90.82 335.74 84.95 341.93 85.48 C 346.77 85.65 350.01 89.63 353.18 92.77 C 404.68 144.28 456.19 195.78 507.69 247.28 C 509.99 249.53 511.69 252.43 512.00 255.68 L 512.00 256.22 C 511.72 259.49 510.04 262.42 507.73 264.68 C 456.22 316.19 404.71 367.69 353.21 419.20 C 350.22 422.10 347.33 425.80 342.93 426.40 C 337.19 427.47 331.28 422.84 330.83 417.05 C 330.29 413.20 332.47 409.71 335.11 407.13 C 381.95 360.31 428.76 313.48 475.59 266.66 C 321.03 266.65 166.47 266.68 11.91 266.64 C 5.88 267.14 0.34 262.37 0.00 256.31 L 0.00 255.82 C 0.25 249.70 5.84 244.85 11.92 245.36 C 166.47 245.32 321.03 245.36 475.58 245.34 C 429.77 199.52 383.96 153.71 338.15 107.91 C 335.09 104.80 331.19 101.68 330.82 96.99 Z" />
+                            </svg>
+                        </button>
                     </div>
+                </form>
+                {% if keyword %}
+                <div class="search_results">
+                    <h3>Results:</h3>
+                    {% if search_results %}
+                    {% for sentence in search_results %}
+                    <p style="margin-bottom:20px;">{{ sentence }}</p>
+                    {% endfor %}
+                    
+                    {% else %}
+                    <p>0 результатов поиска</p>
                     {% endif %}
                 </div>
+                {% endif %}
 
         </main>
         
         <div class="modals_wrapper">
 
             <div class="modal change_background">
-                <h3>Choose background image</h3>
+                <h3>Background Settings</h3>
                 <div class="background_images">
+                    <h5>Choose background image</h5>
                     <ul class="background_images__list">
+                        <li class="background_images__list__element no-img"><span>None</span></li>
                         <li class="background_images__list__element"><img src="{% static "img/bg/bg1.jpg" %}" alt="bg1.jpg"></li>
                         <li class="background_images__list__element"><img src="{% static "img/bg/bg2.jpg" %}" alt="bg2.jpg"></li>
                         <li class="background_images__list__element"><img src="{% static "img/bg/1.jpg" %}" alt="1.jpg"></li>
                         <li class="background_images__list__element"><img src="{% static "img/bg/2.jpg" %}" alt="2.jpg"></li>
                         <li class="background_images__list__element"><img src="{% static "img/bg/3.jpg" %}" alt="3.jpg"></li>
-                        <!-- {% for pic in pics %}
-                        <li style="color:#fff;">{{ pic }}</li>
-                        {% endfor %} -->
                     </ul>
                 </div>
+
+                <div class="background_images__sliders">
+                    <div class="background_images__sliders__blur background_images__sliders__slider">
+                        <h5>Background blur</h5>
+                        <input type="range" class="background_images__slider" id="blur_range" min="0" max="50">
+                        <span class="percent" id="blur_percent">0</span>
+                    </div>
+                    <div class="background_images__sliders__dim background_images__sliders__slider">
+                        <h5>Dim background</h5>
+                        <input type="range" class="background_images__slider" id="dim_range" min="0" max="100">
+                        <span class="percent" id="dim_percent">0%</span>
+                    </div>
+                </div>
+
                 <div class="change_background__bottom_buttons">
-                    <button class="change_backgorund__apply change_background__bottom_buttons__button" onclick="">Apply</button>
+                    <button class="change_backgorund__apply change_background__bottom_buttons__button">Apply</button>
                     <button class="close_modal change_background__bottom_buttons__button">Close</button>
                 </div>
             </div>

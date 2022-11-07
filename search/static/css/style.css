@@ -26,14 +26,18 @@ ul {
     list-style:none;
 }
 
+.wrapper {
+    padding:5%;
+}
+
 .theme-dark {
     --background:#111;
     --text-main:#eee;
     --accent:#fff;
-    --border-main:#222;
-    --border-hover:#333;
-    --arrow-main:#444;
-    --arrow-hover:#777;
+    --border-main:#888;
+    --border-hover:#aaa;
+    --arrow-main:#888;
+    --arrow-hover:#ccc;
     --transparent-hover:#ffffff20;
 }
 
@@ -64,13 +68,14 @@ ul {
     position:absolute;
     left:75px;
     top:75px;
+    display:flex;
 }
 
 .theme-switcher button {
     background:none;
     border:none;
     padding:20px;
-    border-radius:50%;
+    border-radius:200px;
     transition:0.2s;
     display:flex;
     justify-content:center;
@@ -83,7 +88,6 @@ ul {
 
 body {
     background:var(--background);
-    /* background:url('../img/bg1.jpg') no-repeat center center / cover; */
     color:var(--text-main);
     min-height:100%;
     
@@ -93,8 +97,19 @@ body {
 
     position:relative;
     overflow:hidden;
+}
 
-    padding:5%;
+body::before {
+    content:'';
+    display:block;
+    position:absolute;
+    left:0;
+    right:0;
+    top:0;
+    bottom:0;
+    background-color:inherit;
+    pointer-events:none;
+    z-index:-1;
 }
 
 main {
@@ -102,18 +117,6 @@ main {
     flex-direction:column;
     justify-content:center;
     align-items:center;
-}
-
-.content_wrapper {
-    backdrop-filter: blur(15px);
-    padding:50px;
-    border-radius:40px;
-    box-shadow:10px 10px 30px #00000050;
-
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
 }
 
 .search_form {
@@ -247,7 +250,7 @@ h3 {
     }
 
     .search_bar {
-        width:80%;
+        width:100%;
     }
 
     .search {
@@ -295,8 +298,9 @@ h3 {
 }
 
 .background_images__list {
-    display:flex;
-    flex-flow:row wrap;
+    display:grid;
+    /* flex-flow:row wrap; */
+    grid-template-columns: repeat(5, 1fr);
 
     gap:10px;
 }
@@ -311,9 +315,14 @@ h3 {
     align-items:center;
     box-sizing:border-box;
     transition:0.15s;
+    cursor:pointer;
 }
 
-.background_images__list__element:hover img {
+.background_images__list__element > * {
+    transition:.15s;
+}
+
+.background_images__list__element:hover > * {
     transform:scale(1.25);
 }
 
@@ -321,11 +330,10 @@ h3 {
     height:100%;
     box-sizing:border-box;
     display:block;
-    transition:0.15s;
 }
 
 .element-selected {
-    border:3px solid #fff;
+    border:3px solid var(--accent);
 }
 
 .change_background__bottom_buttons {
@@ -333,3 +341,4 @@ h3 {
     display:flex;
     gap:15px;
 }
+
