@@ -1,14 +1,14 @@
 "use strict";
 
 
-// Переключение темы
+// установка настроек
 let themeStored = localStorage.getItem('theme');
 if (themeStored)
-    document.body.className = localStorage.getItem('theme');
+document.body.className = localStorage.getItem('theme');
 
 let backgroundStored = localStorage.getItem('background');
 if (backgroundStored)
-    document.body.style.background = `url( ${backgroundStored} ) no-repeat center center / cover`;
+document.body.style.background = `url( ${backgroundStored} ) no-repeat center center / cover`;
 
 let blurStored = localStorage.getItem('backgroundBlur');
 if (blurStored) {
@@ -17,15 +17,16 @@ if (blurStored) {
 }
 
 if ( checkBackground() ) {
-    let dimStored = localStorage.getItem('backgroundDim');
-    if (dimStored)
-        document.body.style.backgroundColor = `rgba(0, 0, 0, ${dimStored / 100})`;
-    document.querySelector('#dim_range').value = dimStored;
+    let opacityStored = localStorage.getItem('backgroundOpacity');
+    if (opacityStored)
+    document.querySelector('.background_opacity').style.opacity = opacityStored / 100;
+    document.querySelector('#bg_opacity_range').value = opacityStored;
 }
 
 
+// Переключение темы
 function switch_theme() {
-    const theme = document.querySelectorAll('body, .search_bar, .search_bar svg');
+    const theme = document.querySelectorAll('body, .search_bar, .search_bar svg, .background_opacity');
     
     theme.forEach(elem => {
         elem.style.transition = '2s';
@@ -129,12 +130,12 @@ backgrounds.forEach(function(elem) {
 // слайдеры
 const blurRange = document.querySelector('#blur_range');
 const blurValue = document.querySelector('#blur_percent');
-const dimRange = document.querySelector('#dim_range');
-const dimPercent = document.querySelector('#dim_percent');
+const opacityRange = document.querySelector('#bg_opacity_range');
+const opacityPercent = document.querySelector('#bg_opacity_percent');
 
 setInterval(() => {
-    blurValue.textContent = blurRange.value;
-    dimPercent.textContent = dimRange.value + '%';
+    blurValue.textContent = blurRange.value + 'px';
+    opacityPercent.textContent = opacityRange.value + '%';
 }, 10);
 
 
@@ -152,10 +153,10 @@ document.querySelector('.change_backgorund__apply').addEventListener('click', ev
     
     document.body.style.backdropFilter = `blur( ${blurRange.value}px)`;
     if ( checkBackground() )
-        document.body.style.backgroundColor = `rgba(0, 0, 0, ${dimRange.value / 100})`;
+        document.querySelector('.background_opacity').style.opacity = opacityRange.value / 100;
 
     localStorage.setItem('backgroundBlur', blurRange.value);
-    localStorage.setItem('backgroundDim', dimRange.value);
+    localStorage.setItem('backgroundOpacity', opacityRange.value);
 
     closeModals();
 })

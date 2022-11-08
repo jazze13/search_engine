@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="{% static "css/style.css" %}">
 </head>
 <body class="theme-light">
+
+    <div class="background_opacity"></div>
     
     <div class="wrapper">
 
@@ -135,11 +137,11 @@
                     <h5>Choose background image</h5>
                     <ul class="background_images__list">
                         <li class="background_images__list__element no-img"><span>None</span></li>
-                        <li class="background_images__list__element"><img src="{% static "img/bg/bg1.jpg" %}" alt="bg1.jpg"></li>
-                        <li class="background_images__list__element"><img src="{% static "img/bg/bg2.jpg" %}" alt="bg2.jpg"></li>
                         <li class="background_images__list__element"><img src="{% static "img/bg/1.jpg" %}" alt="1.jpg"></li>
                         <li class="background_images__list__element"><img src="{% static "img/bg/2.jpg" %}" alt="2.jpg"></li>
                         <li class="background_images__list__element"><img src="{% static "img/bg/3.jpg" %}" alt="3.jpg"></li>
+                        <li class="background_images__list__element"><img src="{% static "img/bg/4.png" %}" alt="4.png"></li>
+                        <!-- <li class="background_images__list__element"><img src="{% static "img/bg/3.jpg" %}" alt="5.jpg"></li> -->
                     </ul>
                 </div>
 
@@ -147,12 +149,12 @@
                     <div class="background_images__sliders__blur background_images__sliders__slider">
                         <h5>Background blur</h5>
                         <input type="range" class="background_images__slider" id="blur_range" min="0" max="50">
-                        <span class="percent" id="blur_percent">0</span>
+                        <span class="percent" id="blur_percent">0px</span>
                     </div>
-                    <div class="background_images__sliders__dim background_images__sliders__slider">
-                        <h5>Dim background</h5>
-                        <input type="range" class="background_images__slider" id="dim_range" min="0" max="100">
-                        <span class="percent" id="dim_percent">0%</span>
+                    <div class="background_images__sliders__bg_opacity background_images__sliders__slider">
+                        <h5>Background opacity</h5>
+                        <input type="range" class="background_images__slider" id="bg_opacity_range" min="0" max="90">
+                        <span class="percent" id="bg_opacity_percent">0%</span>
                     </div>
                 </div>
 

@@ -99,10 +99,10 @@ body {
     overflow:hidden;
 }
 
-body::before {
+.background_opacity {
     content:'';
     display:block;
-    position:absolute;
+    position:fixed;
     left:0;
     right:0;
     top:0;
@@ -110,6 +110,7 @@ body::before {
     background-color:inherit;
     pointer-events:none;
     z-index:-1;
+    background-color:var(--background);
 }
 
 main {
