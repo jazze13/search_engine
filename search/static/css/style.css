@@ -80,6 +80,7 @@ ul {
     display:flex;
     justify-content:center;
     align-items:center;
+    outline:none;
 }
 
 .theme-switcher button:hover {
@@ -88,15 +89,15 @@ ul {
 
 body {
     background:var(--background);
+    background-attachment:fixed !important;
     color:var(--text-main);
-    min-height:100%;
+    min-height:100vh;
     
     display:flex;
     align-items:center;
     justify-content:center;
 
     position:relative;
-    overflow:hidden;
 }
 
 .background_opacity {
@@ -279,8 +280,8 @@ h3 {
     position:fixed;
     top:0;
     right:0;
-    bottom:0;
     left:0;
+    height:100vh;
 
     display:none;
     justify-content:center;
@@ -300,7 +301,6 @@ h3 {
 
 .background_images__list {
     display:grid;
-    /* flex-flow:row wrap; */
     grid-template-columns: repeat(5, 1fr);
 
     gap:10px;
@@ -343,3 +343,13 @@ h3 {
     gap:15px;
 }
 
+.change_background__bottom_buttons__button {
+    padding:10px 20px;
+    transition:.15s;
+    border:2px solid var(--accent);
+}
+
+.change_background__bottom_buttons__button:hover {
+    background:var(--accent);
+    color:var(--background);
+}

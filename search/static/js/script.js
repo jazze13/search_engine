@@ -3,12 +3,14 @@
 
 // установка настроек
 let themeStored = localStorage.getItem('theme');
-if (themeStored)
-document.body.className = localStorage.getItem('theme');
+if (themeStored) {
+    document.body.className = localStorage.getItem('theme');
+}
 
 let backgroundStored = localStorage.getItem('background');
-if (backgroundStored)
-document.body.style.background = `url( ${backgroundStored} ) no-repeat center center / cover`;
+if (backgroundStored) {
+    document.body.style.background = `url( ${backgroundStored} ) no-repeat center center / cover`;
+}
 
 let blurStored = localStorage.getItem('backgroundBlur');
 if (blurStored) {
@@ -16,9 +18,8 @@ if (blurStored) {
     document.querySelector('#blur_range').value = blurStored;
 }
 
-if ( checkBackground() ) {
-    let opacityStored = localStorage.getItem('backgroundOpacity');
-    if (opacityStored)
+let opacityStored = localStorage.getItem('backgroundOpacity');
+if (opacityStored) {
     document.querySelector('.background_opacity').style.opacity = opacityStored / 100;
     document.querySelector('#bg_opacity_range').value = opacityStored;
 }
@@ -49,14 +50,14 @@ let searchActive = false;
 // Ripple
 const clickEffect = document.querySelectorAll('.click_effect');
 clickEffect.forEach(elem => {
-    elem.addEventListener('click', function(e) {
+    elem.addEventListener('click', function(event) {
         if ( elem.classList.contains('search_bar') && searchActive )
             return;
         
-        let x = e.clientX - e.target.offsetLeft;
-        let y = e.clientY - e.target.offsetTop;
+        let x = event.clientX - event.target.offsetLeft;
+        let y = event.clientY - event.target.offsetTop;
         console.log('x, y:', x, y);
-        console.log('clientx, target:', e.clientX, e.target.offsetLeft)
+        console.log('clientx, target:', event.clientX, event.target.offsetLeft)
 
         let ripple = document.createElement('span');
         ripple.className = 'ripple';
@@ -95,12 +96,28 @@ document.querySelector('.change_background').addEventListener('click', function(
     document.querySelectorAll('.modals_wrapper, .modal').forEach(elem => {
         elem.style.display = 'flex';
     })
+    document.body.style.overflow = 'hidden';
+
 })
 
 function closeModals() {
     document.querySelectorAll('.modals_wrapper, .modal').forEach(elem => {
         elem.style.display = 'none';
     })
+    
+    document.body.style.overflow = '';
+
+    let blurStored = localStorage.getItem('backgroundBlur');
+    if (blurStored) {
+        document.querySelector('#blur_range').value = blurStored;
+        document.querySelector('#blur_percent').textContent = blurStored;
+    }
+    
+    let opacityStored = localStorage.getItem('backgroundOpacity');
+    if (opacityStored) {
+        document.querySelector('#bg_opacity_range').value = opacityStored;
+        document.querySelector('#bg_opacity_percent').textContent = opacityStored;
+    }
 }
 
 document.querySelector('.close_modal').addEventListener( 'click', () => {
@@ -117,7 +134,7 @@ document.querySelector('.modals_wrapper').addEventListener('click', function(eve
 // выбор бэкграунда
 const backgrounds = document.querySelectorAll('.background_images__list__element');
 backgrounds.forEach(function(elem) {
-    elem.addEventListener('click', function(event) {
+    elem.addEventListener('click', function() {
         document.querySelectorAll('.element-selected').forEach(e => {
             e.classList.toggle('element-selected');
         })
@@ -152,8 +169,7 @@ document.querySelector('.change_backgorund__apply').addEventListener('click', ev
     }
     
     document.body.style.backdropFilter = `blur( ${blurRange.value}px)`;
-    if ( checkBackground() )
-        document.querySelector('.background_opacity').style.opacity = opacityRange.value / 100;
+    document.querySelector('.background_opacity').style.opacity = opacityRange.value / 100;
 
     localStorage.setItem('backgroundBlur', blurRange.value);
     localStorage.setItem('backgroundOpacity', opacityRange.value);
@@ -162,18 +178,11 @@ document.querySelector('.change_backgorund__apply').addEventListener('click', ev
 })
 
 
-function checkBackground() {
-    if (document.body.style.backgroundImage) return true;
-    else return false;
-}
-
-
-// постоянная подсветка выбранного бэкграунда
+// подсветка выбранного бэкграунда
 const bgs = document.querySelectorAll('.background_images__list__element img');
 bgs.forEach( function(bg) {
     let bgImg = bg.src.slice( bg.src.match('/static').index );
     if (bgImg == backgroundStored) {
         bg.parentElement.classList.toggle('element-selected');
-        return;
     }
 })
