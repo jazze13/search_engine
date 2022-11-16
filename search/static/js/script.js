@@ -186,3 +186,21 @@ bgs.forEach( function(bg) {
         bg.parentElement.classList.toggle('element-selected');
     }
 })
+
+const rangeButtons = document.querySelectorAll('.range_button');
+
+rangeButtons.forEach(button => {
+    button.addEventListener('click', event => {
+        const sign = event.target.textContent;
+        switch(sign) {
+            case '+':
+                event.target.parentElement.querySelector('input').value++;
+                break;
+            case '-':
+                event.target.parentElement.querySelector('input').value--;
+                break;
+            default:
+                console.log('Error: unexpected sign in range button:\n', event.target);
+        }
+    })
+})
