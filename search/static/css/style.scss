@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Passions+Conflict&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sono&display=swap');
 
 * {
     padding:0;
@@ -66,22 +67,26 @@ main {
     --background:#111;
     --text-main:#eee;
     --accent:#fff;
+    --accent-dark:#444;
     --border-main:#888;
     --border-hover:#aaa;
     --arrow-main:#888;
     --arrow-hover:#ccc;
     --transparent-hover:#ffffff20;
+    --modal-background:#00000090;
 }
 
 .theme-light {
-    --background:#fff;
+    --background:#eee;
     --text-main:#222;
     --accent:#000;
+    --accent-dark:#444;
     --border-main:#bbb;
     --border-hover:#888;
     --arrow-main:#888;
     --arrow-hover:#555;
     --transparent-hover:#00000010;
+    --modal-background:#ffffff90;
 }
 
 .theme-dark .switch_to_dark_theme,
@@ -236,26 +241,29 @@ main {
     display:none;
     justify-content:center;
     align-items:center;
-    background:#00000050;
 
     overflow-y:scroll;
 }
 
 .modal {
-    background:var(--background);
     color:var(--text-main);
     display:flex;
     flex-direction:column;
     align-items:flex-start;
     padding:50px;
     gap:30px;
+    margin:auto;
+
+    border-radius:25px;
+    background:var(--modal-background);
+    backdrop-filter:blur(20px);
 }
 
 .background_images__list {
     display:grid;
     grid-template-columns: repeat(5, 1fr);
-
     gap:10px;
+    margin-top:10px;
 
     &__element {
         width:150px;
@@ -268,6 +276,10 @@ main {
         box-sizing:border-box;
         transition:0.15s;
         cursor:pointer;
+
+        &.no-img {
+            background:var(--background);
+        }
 
         & > * {
             transition:.15s;
@@ -321,15 +333,132 @@ main {
     flex-direction:row;
     align-items:center;
     gap:5px;
+    margin-top:5px;
 }
 
 .range_button {
     display:block;
-    padding:5px;
+    padding:0 5px;
     border-radius:5px;
     transition:.15s;
+    font-family:'sono';
+    font-size:20px;
 }
 
 .range_button:hover {
     background:var(--transparent-hover);
+}
+
+input[type="range"] {
+    appearance:none;
+    height:2px;
+    // background:var(--accent);
+    border-radius:4px;
+
+    // --range: calc(var(--max) - var(--min));
+    // --ratio: calc((var(--value) - var(--min)) / var(--range));
+    // --sx: calc(0.5 * 10px + var(--ratio) * (100% - 10px));
+
+    // &::-webkit-slider-runnable-track {
+    //     appearance:none;
+    //     // background:var(--accent-dark);
+    //     border-radius:4px;
+    //     width:100%;
+    //     height:2px;
+
+    //     background: linear-gradient( var(--accent), var(-accent) ) 0/var(--sx) 100% no-repeat, var(--accent-dark);
+    // }
+
+    &::range-progress {
+        background:var(--accent);
+        border-radius:4px;
+        width:100%;
+        height:100%;
+    }
+
+    &::-moz-range-track {
+        appearance:none;
+        background:var(--accent-dark);
+        border-radius:4px;
+        width:100%;
+        height:100%;
+    }
+
+    &::-moz-range-progress {
+        background:var(--accent);
+        border-radius:4px;
+        width:100%;
+        height:100%;
+    }
+
+    &::-ms-track {
+        appearance:none;
+        background:var(var(--accent-dark));
+        border-radius:4px;
+        width:100%;
+        height:100%;
+        // background: linear-gradient( var(--accent), var(-accent) ) 0/var(--sx) 100% no-repeat, var(--accent-dark);
+    }
+
+    &::-ms-fill-lower {
+        background:var(--accent);
+        border-radius:4px;
+        width:100%;
+        height:100%;
+    }
+
+    &::-ms-fill-upper {
+        background:var(--accent-dark);
+        border-radius:4px;
+        width:100%;
+        height:100%;
+    }
+    
+    &::-webkit-slider-thumb {
+        appearance:none;
+        background:var(--accent);
+        border:none;
+        border-radius:50%;
+        width:10px;
+        height:10px;
+        transition:.15s;
+        transform:translate(0, -45%);
+    }
+
+    &::-moz-range-thumb {
+        appearance:none;
+        background:var(--accent);
+        border:none;
+        border-radius:50%;
+        width:10px;
+        height:10px;
+        transition:.15s;
+    }
+
+    &::-ms-thumb {
+        appearance:none;
+        background:var(--accent);
+        border:none;
+        border-radius:50%;
+        width:10px;
+        height:10px;
+        transition:.15s;
+    }
+
+    &:hover {
+        &::-moz-range-thumb {
+            width:15px;
+            height:15px;
+        }
+
+        &::-webkit-slider-thumb {
+            width:15px;
+            height:15px;
+        }
+
+        &::-ms-thumb {
+            width:15px;
+            height:15px;
+        }
+    }
 }

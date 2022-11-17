@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Passions+Conflict&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Sono&display=swap");
 * {
   padding: 0;
   margin: 0;
@@ -78,22 +79,26 @@ main {
   --background:#111;
   --text-main:#eee;
   --accent:#fff;
+  --accent-dark:#444;
   --border-main:#888;
   --border-hover:#aaa;
   --arrow-main:#888;
   --arrow-hover:#ccc;
   --transparent-hover:#ffffff20;
+  --modal-background:#00000090;
 }
 
 .theme-light {
-  --background:#fff;
+  --background:#eee;
   --text-main:#222;
   --accent:#000;
+  --accent-dark:#444;
   --border-main:#bbb;
   --border-hover:#888;
   --arrow-main:#888;
   --arrow-hover:#555;
   --transparent-hover:#00000010;
+  --modal-background:#ffffff90;
 }
 
 .theme-dark .switch_to_dark_theme,
@@ -302,12 +307,10 @@ main {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  background: #00000050;
   overflow-y: scroll;
 }
 
 .modal {
-  background: var(--background);
   color: var(--text-main);
   display: -webkit-box;
   display: -ms-flexbox;
@@ -321,6 +324,11 @@ main {
           align-items: flex-start;
   padding: 50px;
   gap: 30px;
+  margin: auto;
+  border-radius: 25px;
+  background: var(--modal-background);
+  -webkit-backdrop-filter: blur(20px);
+          backdrop-filter: blur(20px);
 }
 
 .background_images__list {
@@ -329,6 +337,7 @@ main {
   -ms-grid-columns: (1fr)[5];
       grid-template-columns: repeat(5, 1fr);
   gap: 10px;
+  margin-top: 10px;
 }
 
 .background_images__list__element {
@@ -349,6 +358,10 @@ main {
   -webkit-transition: 0.15s;
   transition: 0.15s;
   cursor: pointer;
+}
+
+.background_images__list__element.no-img {
+  background: var(--background);
 }
 
 .background_images__list__element > * {
@@ -418,22 +431,125 @@ main {
       -ms-flex-align: center;
           align-items: center;
   gap: 5px;
+  margin-top: 5px;
 }
 
 .range_button {
   display: block;
-  cursor: pointer;
-  padding: 5px;
+  padding: 0 5px;
   border-radius: 5px;
   -webkit-transition: .15s;
   transition: .15s;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
+  font-family: 'sono';
+  font-size: 20px;
 }
 
 .range_button:hover {
   background: var(--transparent-hover);
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  height: 2px;
+  border-radius: 4px;
+}
+
+input[type="range"]::range-progress {
+  background: var(--accent);
+  border-radius: 4px;
+  width: 100%;
+  height: 100%;
+}
+
+input[type="range"]::-moz-range-track {
+  -moz-appearance: none;
+       appearance: none;
+  background: var(--accent-dark);
+  border-radius: 4px;
+  width: 100%;
+  height: 100%;
+}
+
+input[type="range"]::-moz-range-progress {
+  background: var(--accent);
+  border-radius: 4px;
+  width: 100%;
+  height: 100%;
+}
+
+input[type="range"]::-ms-track {
+  appearance: none;
+  background: var(var(--accent-dark));
+  border-radius: 4px;
+  width: 100%;
+  height: 100%;
+}
+
+input[type="range"]::-ms-fill-lower {
+  background: var(--accent);
+  border-radius: 4px;
+  width: 100%;
+  height: 100%;
+}
+
+input[type="range"]::-ms-fill-upper {
+  background: var(--accent-dark);
+  border-radius: 4px;
+  width: 100%;
+  height: 100%;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+          appearance: none;
+  background: var(--accent);
+  border: none;
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  -webkit-transition: .15s;
+  transition: .15s;
+  -webkit-transform: translate(0, -45%);
+          transform: translate(0, -45%);
+}
+
+input[type="range"]::-moz-range-thumb {
+  -moz-appearance: none;
+       appearance: none;
+  background: var(--accent);
+  border: none;
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  -webkit-transition: .15s;
+  transition: .15s;
+}
+
+input[type="range"]::-ms-thumb {
+  appearance: none;
+  background: var(--accent);
+  border: none;
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  -webkit-transition: .15s;
+  transition: .15s;
+}
+
+input[type="range"]:hover::-moz-range-thumb {
+  width: 15px;
+  height: 15px;
+}
+
+input[type="range"]:hover::-webkit-slider-thumb {
+  width: 15px;
+  height: 15px;
+}
+
+input[type="range"]:hover::-ms-thumb {
+  width: 15px;
+  height: 15px;
 }
 /*# sourceMappingURL=style.css.map */

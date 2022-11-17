@@ -56,8 +56,6 @@ clickEffect.forEach(elem => {
         
         let x = event.clientX - event.target.offsetLeft;
         let y = event.clientY - event.target.offsetTop;
-        console.log('x, y:', x, y);
-        console.log('clientx, target:', event.clientX, event.target.offsetLeft)
 
         let ripple = document.createElement('span');
         ripple.className = 'ripple';
@@ -153,6 +151,13 @@ const opacityPercent = document.querySelector('#bg_opacity_percent');
 setInterval(() => {
     blurValue.textContent = blurRange.value + 'px';
     opacityPercent.textContent = opacityRange.value + '%';
+
+    // for ( const el of [blurRange, opacityRange] ) {
+    //     el.style.setProperty("--value", el.value);
+    //     el.style.setProperty("--min", el.min === "" ? "0" : el.min);
+    //     el.style.setProperty("--max", el.max === "" ? "100" : el.max);
+    //     el.style.setProperty("--value", el.value);
+    // }
 }, 10);
 
 
@@ -199,8 +204,29 @@ rangeButtons.forEach(button => {
             case '-':
                 event.target.parentElement.querySelector('input').value--;
                 break;
-            default:
-                console.log('Error: unexpected sign in range button:\n', event.target);
         }
+    })
+})
+
+
+function lock() {
+    let offset = window.innerWidth - document.body.offsetWidth;
+
+    document.body.style.overflow = 'hidden';
+    // document.body.style.paddingRight = offset;
+}
+
+function unlock() {
+    document.body.style.overflow = '';
+    document.body.style.paddingRignt = '';
+}
+
+document.querySelectorAll('input[type=range]').forEach(input => {
+    input.addEventListener('change', e => {
+        const el = e.target;
+        el.style.setProperty("--value", el.value);
+        el.style.setProperty("--min", el.min === "" ? "0" : el.min);
+        el.style.setProperty("--max", el.max === "" ? "100" : el.max);
+        el.style.setProperty("--value", el.value);
     })
 })
