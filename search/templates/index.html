@@ -137,10 +137,6 @@
                     <h5>Choose background image</h5>
                     <ul class="background_images__list">
                         <li class="background_images__list__element no-img"><span>Default</span></li>
-                        <!-- <li class="background_images__list__element"><img src="{% static "img/bg/1.jpg" %}" alt="1.jpg"></li>
-                        <li class="background_images__list__element"><img src="{% static "img/bg/2.jpg" %}" alt="2.jpg"></li>
-                        <li class="background_images__list__element"><img src="{% static "img/bg/3.jpg" %}" alt="3.jpg"></li>
-                        <li class="background_images__list__element"><img src="{% static "img/bg/4.png" %}" alt="4.png"></li> -->
                         {% for img in imgs %}
                         <li class="background_images__list__element"><img src="{{ img }}" alt="bg"></li>
                         {% endfor %}

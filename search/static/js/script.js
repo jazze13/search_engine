@@ -94,7 +94,8 @@ document.querySelector('.change_background').addEventListener('click', function(
     document.querySelectorAll('.modals_wrapper, .modal').forEach(elem => {
         elem.style.display = 'flex';
     })
-    document.body.style.overflow = 'hidden';
+    // document.body.style.overflow = 'hidden';
+	lock();
 
 })
 
@@ -103,7 +104,8 @@ function closeModals() {
         elem.style.display = 'none';
     })
     
-    document.body.style.overflow = '';
+    // document.body.style.overflow = '';
+	unlock();
 
     let blurStored = localStorage.getItem('backgroundBlur');
     if (blurStored) {
@@ -116,6 +118,18 @@ function closeModals() {
         document.querySelector('#bg_opacity_range').value = opacityStored;
         document.querySelector('#bg_opacity_percent').textContent = opacityStored;
     }
+}
+
+function lock() {
+    let offset = window.innerWidth - document.body.offsetWidth;
+
+    document.body.style.overflow = 'hidden';
+    document.body.style.paddingRight = offset + 'px';
+}
+
+function unlock() {
+    document.body.style.overflow = '';
+    document.body.style.paddingRight = '';
 }
 
 document.querySelector('.close_modal').addEventListener( 'click', () => {
@@ -151,13 +165,6 @@ const opacityPercent = document.querySelector('#bg_opacity_percent');
 setInterval(() => {
     blurValue.textContent = blurRange.value + 'px';
     opacityPercent.textContent = opacityRange.value + '%';
-
-    // for ( const el of [blurRange, opacityRange] ) {
-    //     el.style.setProperty("--value", el.value);
-    //     el.style.setProperty("--min", el.min === "" ? "0" : el.min);
-    //     el.style.setProperty("--max", el.max === "" ? "100" : el.max);
-    //     el.style.setProperty("--value", el.value);
-    // }
 }, 10);
 
 
@@ -194,6 +201,8 @@ bgs.forEach( function(bg) {
 
 const rangeButtons = document.querySelectorAll('.range_button');
 
+
+// + и - к рэнджам
 rangeButtons.forEach(button => {
     button.addEventListener('click', event => {
         const sign = event.target.textContent;
@@ -208,25 +217,3 @@ rangeButtons.forEach(button => {
     })
 })
 
-
-function lock() {
-    let offset = window.innerWidth - document.body.offsetWidth;
-
-    document.body.style.overflow = 'hidden';
-    // document.body.style.paddingRight = offset;
-}
-
-function unlock() {
-    document.body.style.overflow = '';
-    document.body.style.paddingRignt = '';
-}
-
-document.querySelectorAll('input[type=range]').forEach(input => {
-    input.addEventListener('change', e => {
-        const el = e.target;
-        el.style.setProperty("--value", el.value);
-        el.style.setProperty("--min", el.min === "" ? "0" : el.min);
-        el.style.setProperty("--max", el.max === "" ? "100" : el.max);
-        el.style.setProperty("--value", el.value);
-    })
-})
