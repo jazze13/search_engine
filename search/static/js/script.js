@@ -162,9 +162,17 @@ const blurValue = document.querySelector('#blur_percent');
 const opacityRange = document.querySelector('#bg_opacity_range');
 const opacityPercent = document.querySelector('#bg_opacity_percent');
 
+const rangeInputs = document.querySelectorAll('input[type=range]');
+
 setInterval(() => {
     blurValue.textContent = blurRange.value + 'px';
     opacityPercent.textContent = opacityRange.value + '%';
+
+    rangeInputs.forEach(input => {
+        let percent = 100 / input.max * input.value;
+        input.style.setProperty('--progress', `${percent}%`);
+    })
+
 }, 10);
 
 
