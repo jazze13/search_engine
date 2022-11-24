@@ -54,8 +54,9 @@ clickEffect.forEach(elem => {
         if ( elem.classList.contains('search_bar') && searchActive )
             return;
         
-        let x = event.clientX - event.target.offsetLeft;
-        let y = event.clientY - event.target.offsetTop;
+		let rect = event.target.getBoundingClientRect();
+		let x = event.clientX - rect.left;
+		let y = event.clientY - rect.top;
 
         let ripple = document.createElement('span');
         ripple.className = 'ripple';
@@ -90,44 +91,50 @@ search.onblur = () => {
 
 
 // Модалки
-document.querySelector('.change_background').addEventListener('click', function() {
-    document.querySelectorAll('.modals_wrapper, .modal').forEach(elem => {
-        elem.style.display = 'flex';
-    })
-    // document.body.style.overflow = 'hidden';
-	lock();
+document.querySelector('.visual_settings').addEventListener('click', modalOpen);
 
-})
+function modalOpen() {
+    document.querySelector('.modals_wrapper').style.display = 'flex';
 
-function closeModals() {
-    document.querySelectorAll('.modals_wrapper, .modal').forEach(elem => {
-        elem.style.display = 'none';
-    })
-    
-    // document.body.style.overflow = '';
-	unlock();
+	const modal = document.querySelector('.modal.change_background');
+	modal.style.display = 'flex';
 
-    let blurStored = localStorage.getItem('backgroundBlur');
-    if (blurStored) {
-        document.querySelector('#blur_range').value = blurStored;
-        document.querySelector('#blur_percent').textContent = blurStored;
-    }
-    
-    let opacityStored = localStorage.getItem('backgroundOpacity');
-    if (opacityStored) {
-        document.querySelector('#bg_opacity_range').value = opacityStored;
-        document.querySelector('#bg_opacity_percent').textContent = opacityStored;
-    }
+	modal.style.animation = '.5s modal-appear ease-out';
+
+	lockBodyScroll();
 }
 
-function lock() {
+function closeModals() {
+	const modal = document.querySelector('.modal');
+	modal.style.animation = '.3s modal-disappear ease-in';
+	unlockBodyScroll();
+
+	setTimeout(() => {
+		document.querySelector('.modals_wrapper').style.display = 'none';
+		modal.style.display = 'none';
+	
+		let blurStored = localStorage.getItem('backgroundBlur');
+		if (blurStored) {
+			document.querySelector('#blur_range').value = blurStored;
+			document.querySelector('#blur_percent').textContent = blurStored;
+		}
+		
+		let opacityStored = localStorage.getItem('backgroundOpacity');
+		if (opacityStored) {
+			document.querySelector('#bg_opacity_range').value = opacityStored;
+			document.querySelector('#bg_opacity_percent').textContent = opacityStored;
+		}
+	}, 300);
+}
+
+function lockBodyScroll() {
     let offset = window.innerWidth - document.body.offsetWidth;
 
     document.body.style.overflow = 'hidden';
     document.body.style.paddingRight = offset + 'px';
 }
 
-function unlock() {
+function unlockBodyScroll() {
     document.body.style.overflow = '';
     document.body.style.paddingRight = '';
 }
